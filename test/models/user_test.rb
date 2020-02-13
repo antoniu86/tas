@@ -31,12 +31,19 @@ class UserTest < ActiveSupport::TestCase
     assert @user1.save, "User not created"
   end
 
-  test "user create both" do
+  test "user create fail" do
     assert @user1.save, "User 1 not created"
     assert @user2.save, "User 2 not created"
   end
 
-  test "user updated" do
+  test "user updated pass" do
+    assert @user1.save, "User not saved"
+    @user1.first_name = "first"
+    @user1.last_name = "last"
+    assert @user1.save, "User not updated"
+  end
+
+  test "user updated fail" do
     assert @user1.save, "User not saved"
     @user1.email = nil
     assert @user1.save, "User not updated"
